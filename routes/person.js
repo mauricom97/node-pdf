@@ -1,8 +1,8 @@
-const listEntity = require('../controllers/listEntity')
+const person = require('../controllers/person')
 const express = require('express')
 
 let router = express.Router()
 
-router.post('/', listEntity)
+router.get('/:nome', person)
 
 module.exports = router

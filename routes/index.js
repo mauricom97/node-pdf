@@ -1,5 +1,5 @@
-const entities = require('./entities')
+const person = require('./person')
 
 module.exports = (app) => {
-    app.use('/entities', entities)
+    app.use('/person', person)
 }

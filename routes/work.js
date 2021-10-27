@@ -1,8 +1,8 @@
-const person = require('../controllers/person')
+const work = require('../controllers/work')
 const express = require('express')
 
 let router = express.Router()
 
-router.get('/:nomes/:fase', person)
+router.post('/', work)
 
 module.exports = router

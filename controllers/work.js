@@ -8,9 +8,9 @@ module.exports = async (req, res) => {
 
     try {
       
-      const infos = { nomes: req.params.nomes, fase: req.params.fase }
+      const infos = req.body
 
-        ejs.renderFile('./templates/entities.ejs', { infos: infos }, (err, html) => {
+        ejs.renderFile('./templates/work.ejs', { infos: infos }, (err, html) => {
             if(err) {
                 console.log(err)
                 return res.status(500).json({message: 'error in server'})
@@ -22,11 +22,11 @@ module.exports = async (req, res) => {
 
             }
         
-            pdf.create(html, options).toFile('person.pdf', (error, response) => {
+            pdf.create(html, options).toFile('work.pdf', (error, response) => {
                 if(!error){
                     //console.log(response)
                     //return res.json({message: 'PDF Generate'})
-                    res.download('person.pdf', function(error){
+                    res.download('work.pdf', function(error){
                         console.log("Error : ", error)
                     });
                 }else{

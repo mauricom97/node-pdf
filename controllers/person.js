@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
     try {
       
-      const infos = { nome: req.params.nome, idade: req.params.idade, endereco: req.params.endereco}
+      const infos = { nome: req.params.nome, idade: req.params.idade, endereco: req.params.endereco }
 
         ejs.renderFile('./templates/entities.ejs', { infos: infos }, (err, html) => {
             if(err) {
@@ -22,16 +22,20 @@ module.exports = async (req, res) => {
 
             }
         
-            pdf.create(html, options).toFile('uploads/reports.pdf', (error, response) => {
+            pdf.create(html, options).toFile('person.pdf', (error, response) => {
                 if(!error){
-                    return res.json({message: 'PDF Generate'})
+                    //console.log(response)
+                    //return res.json({message: 'PDF Generate'})
+                    res.download('person.pdf', function(error){
+                        console.log("Error : ", error)
+                    });
                 }else{
                     console.log(error)
                     return res.json({message: 'Fail in Genarated PDF'})
                 }
             })
         })
-    // res.send({"nome": req.params.nome})
+
     } catch (error) {
         
      console.log(error)

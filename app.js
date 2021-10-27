@@ -1,33 +1,15 @@
 const express = require('express')
-const fs = require('fs');
-const pdf = require('html-pdf')
 const port = 3000
 const app = express()
-const exphbs = require('express-handlebars')
-const ejs = require('ejs')
+const bodyParser = require('body-parser')
 
-app.get('/:name', (req, res) => {
-    ejs.renderFile('./templates/index.ejs', {name: req.params.name}, (err, html) => {
-        if(err) {
-            return res.status(500).json({message: 'error in server'})
-        }
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
 
-        const options = {
-            format: 'A4',
-            border: {
-                right: 8
-            }
-        }
-
-        pdf.create(html, options).toFile('./uploads/report.pdf', (error, response) => {
-            if(!error){
-                return res.json({message: 'PDF Generate'})
-            }else{
-                return res.json({message: 'Fail in Genarated PDF'})
-            }
-        })
-    })
-})
+require('./routes/index')(app)
 
 app.listen(port, () => {
     console.log(`Server in ${port}`)

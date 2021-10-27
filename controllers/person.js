@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
     try {
       
-      const infos = { nome: req.params.nome, idade: req.params.idade, endereco: req.params.endereco }
+      const infos = { nomes: req.params.nomes, fase: req.params.fase }
 
         ejs.renderFile('./templates/entities.ejs', { infos: infos }, (err, html) => {
             if(err) {

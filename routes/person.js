@@ -3,6 +3,6 @@ const express = require('express')
 
 let router = express.Router()
 
-router.get('/:nome', person)
+router.get('/:nomes/:fase', person)
 
 module.exports = router

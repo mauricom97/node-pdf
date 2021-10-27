@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
     //             }
     //         })
     //     })
-res.send({"Mensagem": "Rinha de galo"})
+    res.send({"nome": req.params.nome})
     } catch (error) {
         
      console.log(error)
